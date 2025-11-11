@@ -5,13 +5,30 @@
 </template>
 
 <script lang="ts" setup>
+import { core } from "@tauri-apps/api";
 import { useEditor, EditorContent } from "@tiptap/vue-3"
 import StarterKit from "@tiptap/starter-kit"
+import { onMounted } from "vue";
 
+// The prose mirror editor instance.
 const editor = useEditor({
-    content: "<p>I'm running Tiptap with Vue.js.</p>",
+    content: "",
     extensions: [StarterKit],
-})
+});
+
+// Load note content when component is mounted. Currently, there is
+// no error handling and only one file saved.
+onMounted(async () => {
+    const response: string = await core.invoke("load_note");
+    editor.value!.commands.setContent(response);
+
+    // Save note content after every update. Currently, there is
+    // no error handling and only one file saved.
+    editor.value!.on("update", async () => {
+        const content = editor.value?.getHTML() || "";
+        await core.invoke("save_note", { text: content });
+    });
+});
 </script>
 
 <style lang="scss" scoped>
@@ -24,7 +41,7 @@ const editor = useEditor({
     height: 100%;
     flex-direction: column;
 
-    ::v-deep .ProseMirror {
+    :deep(.ProseMirror) {
         // TODO remove
         background-color: $bg-secondary;
 
