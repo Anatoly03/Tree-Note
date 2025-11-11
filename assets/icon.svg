@@ -9,6 +9,8 @@
    id="svg1"
    inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
    sodipodi:docname="icon.svg"
+   inkscape:export-batch-path="/Users/wein/Projects/tree-note/assets"
+   inkscape:export-batch-name="icon"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -26,8 +28,8 @@
      inkscape:document-units="mm"
      showguides="true"
      inkscape:zoom="0.28665174"
-     inkscape:cx="924.46673"
-     inkscape:cy="748.29477"
+     inkscape:cx="645.38244"
+     inkscape:cy="448.27916"
      inkscape:window-width="1440"
      inkscape:window-height="770"
      inkscape:window-x="0"
@@ -35,7 +37,8 @@
      inkscape:window-maximized="0"
      inkscape:current-layer="layer4"
      showborder="false"
-     borderlayer="true" />
+     borderlayer="true"
+     inkscape:export-bgcolor="#00000000" />
   <defs
      id="defs1">
     <linearGradient
@@ -175,6 +178,13 @@
      id="layer4"
      inkscape:label="Apple"
      style="display:inline">
+    <rect
+       style="display:inline;fill:none;stroke-width:0.320152"
+       id="rect2"
+       width="248.9586"
+       height="247.26945"
+       x="-19.06278"
+       y="-18.460264" />
     <path
        id="rect1"
        style="display:inline;fill:url(#linearGradient2);stroke-width:0.328213"
