@@ -6,7 +6,7 @@
 @import "@/assets/main.scss";
 
 .view-title-bar {
-    background-color: $primary-bg-dark;
+    background-color: $bg-accent;
     border-bottom: $border;
     height: 28px;
     font-size: 18px;

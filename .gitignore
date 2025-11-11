@@ -3,6 +3,7 @@ gen
 
 # Rust
 target
+Cargo.lock
 
 # JavaScript
 node_modules

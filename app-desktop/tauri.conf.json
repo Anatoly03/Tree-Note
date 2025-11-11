@@ -13,8 +13,8 @@
     "windows": [
       {
         "title": "Tree Note",
-        "width": 900,
-        "height": 650,
+        "width": 1136,
+        "height": 640,
         "resizable": true,
         "fullscreen": false
       }

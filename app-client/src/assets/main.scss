@@ -2,26 +2,31 @@
  * Colours
  */
 
-// Colours used in the app logo.
-$primary-text: #e5ff80;
-$primary-bg-light: #40bf71;
-$primary-bg-dark: #396020;
-$primary-bg: #2c3e50;
+// Background theme colours
+$bg-default: #fff;
+$bg-accent: #77ccaa;
+$bg-accent-secondary: #449977; // 40bf71
 
-$primary-bg-light-hover: lighten($primary-bg-light, 10%);
-$primary-bg-dark-hover: lighten($primary-bg-dark, 10%);
-$primary-bg-hover: lighten($primary-bg, 10%);
+// Background effect colours
+$bg-secondary: #cccccc;
+$bg-primary: #aaccff;
+$bg-warning: #e5ff80; // ffffaa
+$bg-danger: #ffaaaa;
+$bg-success: #aaffaa;
 
-/*
- * Borders
- */
+// Foreground theme colours
+$fg-default: #000;
+$fg-accent: #004400;
+$fg-accent-secondary: #396020;
 
+// Foreground effect colours
+$fg-secondary: #666666;
+$fg-primary: #3399cc; // 2c3e50
+$fg-warning: #cccc00;
+$fg-danger: #cc3333;
+$fg-success: #33cc33;
+
+// Borders
 $border-color: #556472;
 $border-radius: 5px;
 $border: 1px solid $border-color;
-
-/*
- * Dimensions
- */
-
-$size-small: 575px;
