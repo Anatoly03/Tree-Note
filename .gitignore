@@ -1,0 +1,13 @@
+# Tauri
+gen
+
+# Rust
+target
+
+# JavaScript
+node_modules
+package-lock.json
+dist
+
+# macOS
+*.DS_Store

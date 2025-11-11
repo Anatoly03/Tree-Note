@@ -1,0 +1,27 @@
+/*
+ * Colours
+ */
+
+// Colours used in the app logo.
+$primary-text: #e5ff80;
+$primary-bg-light: #40bf71;
+$primary-bg-dark: #396020;
+$primary-bg: #2c3e50;
+
+$primary-bg-light-hover: lighten($primary-bg-light, 10%);
+$primary-bg-dark-hover: lighten($primary-bg-dark, 10%);
+$primary-bg-hover: lighten($primary-bg, 10%);
+
+/*
+ * Borders
+ */
+
+$border-color: #556472;
+$border-radius: 5px;
+$border: 1px solid $border-color;
+
+/*
+ * Dimensions
+ */
+
+$size-small: 575px;

@@ -1,0 +1,46 @@
+@use 'dockview-vue/dist/styles/dockview.css';
+@import './main.scss';
+
+$--dv-active-sash-color: $border-color;
+
+.dv-split-view-container .dv-sash-container {
+    .dv-sash, .dv-sash:not(.disabled):hover {
+        background-color: $border-color;
+    
+        // &:hover {
+        //     background-color: darken($border-color, 5%);
+        // }
+    }
+}
+
+// .dv-split-view-container.dv-horizontal > .dv-sash-container > .dv-sash
+
+.dv-split-view-container.dv-horizontal {
+    .dv-sash-container .dv-sash {
+        width: 2px;
+    }
+
+    .dv-sash::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -6px;   /* expand area 4px to the left */
+        right: -6px;  /* expand area 4px to the right */
+    }
+}
+
+.dv-split-view-container.dv-vertical {
+    .dv-sash-container .dv-sash {
+        height: 2px;
+    }
+
+    .dv-sash::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -6px;    /* expand area 4px upward */
+        bottom: -6px; /* expand area downward */
+    }
+}

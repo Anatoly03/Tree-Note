@@ -1,0 +1,72 @@
+@import "./main.scss";
+
+input[type=text] {
+    color: $primary-text;
+    border: $border;
+    // border-radius: $border-radius;
+    background-color: $primary-bg;
+
+    &:focus {
+        outline: none;
+        background-color: $primary-bg-hover;
+    }
+
+    transition: background-color 0.3s ease;
+}
+
+input[type=submit], button[type=submit], .submit {
+    color: $primary-bg-dark;
+    border: $border;
+    // border-radius: $border-radius;
+    background-color: $primary-bg-light;
+
+    &:hover {
+        background-color: $primary-bg-light-hover;
+    }
+
+    transition: background-color 0.3s ease;
+}
+
+[contenteditable=true] {
+//     border: $border;
+//     border-radius: $border-radius;
+//     border-color: transparent;
+
+//     &:focus, &:hover {
+//         outline: none;
+//         border-color: $primary-bg-dark;
+//     }
+
+    &:focus {
+        outline: none;
+    }
+
+//     transition: border-color 0.3s ease;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    
+    & > * {
+        margin: 0;
+        align-self: stretch;
+        border: $border;
+        border-radius: 0;
+    }
+
+    & > :first-child {
+        border-top-left-radius: $border-radius;
+        border-bottom-left-radius: $border-radius;
+    }
+
+    & > :not(:first-child) {
+        border-left: none;
+    }
+
+    & > :last-child {
+        border-top-right-radius: $border-radius;
+        border-bottom-right-radius: $border-radius;
+    }
+}
