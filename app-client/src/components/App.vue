@@ -1,11 +1,12 @@
 <template>
     <div class="view-app">
-        <ViewHome />
+        <ViewFileEditor />
     </div>
 </template>
 
 <script lang="ts" setup>
-import ViewHome from "./views/ViewHome.vue";
+// import ViewHome from "./views/ViewHome.vue";
+import ViewFileEditor from "./views/ViewFileEditor.vue";
 </script>
 
 <style lang="scss" scoped>
@@ -13,19 +14,11 @@ import ViewHome from "./views/ViewHome.vue";
 
 .view-app {
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
-    justify-content: flex-start;
 
     background-color: $bg-default;
-
-    .view-app-content {
-        flex: 1;
-        display: flex;
-        width: 100%;
-        height: 100%;
-    }
 }
 </style>
 
@@ -35,6 +28,8 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+    width: 100%;
+    min-height: 100vh;
     margin: 0;
     padding: 0;
 }
