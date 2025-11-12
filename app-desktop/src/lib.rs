@@ -27,7 +27,7 @@ fn load_note(app: AppHandle<Wry>) -> Result<String, String> {
         .get("static")
         .map(|v| {
             v.as_str()
-                .unwrap_or("<b>Edit this to save</b> the static file!")
+                .unwrap_or("<b>Edit this to save</b> the static file! <b>Do not mess up the JSON file this time.</b>")
                 .to_string()
         })
         .unwrap_or("<b>Edit this to save</b> the static file!".to_string());
@@ -38,6 +38,7 @@ fn load_note(app: AppHandle<Wry>) -> Result<String, String> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {

@@ -10,7 +10,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as *;
 
 .view-title-bar {
     display: flex;

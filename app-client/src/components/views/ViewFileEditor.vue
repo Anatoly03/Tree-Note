@@ -1,6 +1,7 @@
 <template>
     <div class="view-file-editor">
         <EditorContent :editor="editor" />
+        <router-link to="/">Back to Home</router-link>
     </div>
 </template>
 
@@ -32,7 +33,7 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/main.scss";
+@use "@/assets/main.scss" as *;
 
 .view-file-editor {
     flex: 1;
