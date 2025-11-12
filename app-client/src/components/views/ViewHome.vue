@@ -32,6 +32,7 @@ async function selectDirectory() {
 </script>
 
 <style lang="scss" scoped>
+@use "sass:color";
 @use "@/assets/main.scss" as *;
 
 .view-home {
@@ -102,7 +103,7 @@ async function selectDirectory() {
             cursor: pointer;
 
             &:hover {
-                background-color: darken($bg-secondary, 10%);
+                background-color: color.adjust($bg-secondary, $lightness: -10%)
             }
 
             transition: background-color 0.3s ease;
