@@ -1,7 +1,6 @@
 <template>
     <div class="view-file-editor">
         <EditorContent :editor="editor" />
-        <router-link to="/">Back to Home</router-link>
     </div>
 </template>
 
@@ -42,7 +41,6 @@ onMounted(async () => {
     flex-direction: column;
 
     :deep(.ProseMirror) {
-
         flex: 1;
         width: 100%;
         min-height: 100%;
@@ -52,9 +50,6 @@ onMounted(async () => {
             outline: none;
         }
     }
-
-    // TODO remove
-    background-color: $bg-secondary;
 }
 </style>
 

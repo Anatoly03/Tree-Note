@@ -49,7 +49,7 @@ async function selectDirectory() {
         background-color: $bg-accent;
         
         margin: 0 40px;
-        border-radius: 0 0 12px 12px;
+        border-radius: 0 0 8px 8px;
         
         .app-logo {
             display: flex;
@@ -87,14 +87,14 @@ async function selectDirectory() {
         background-color: $bg-accent;
         
         margin: 20px 40px;
-        border-radius: 12px;
+        border-radius: 8px;
 
         background-color: $bg-secondary;
 
         .menu-action {
             margin: 5px 10px;
             padding: 5px 10px;
-            border-radius: 8px;
+            border-radius: 6px;
             // background-color: $bg-primary;
             color: $fg-default;
             font-weight: 500;
