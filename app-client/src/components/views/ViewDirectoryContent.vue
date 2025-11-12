@@ -1,6 +1,11 @@
 <template>
     <div class="view-directory-content">
-        <div v-for="file in fileTree" :key="file.id" class="content">
+        <div
+            v-for="file in fileTree"
+            :key="file.id"
+            class="content"
+            :class="{ 'content-dir': file.isDir, 'content-file': file.isFile }"
+        >
             <font-awesome-icon icon="fa-regular fa-folder" v-if="file.isDir" />
             <font-awesome-icon icon="fa-regular fa-file" v-if="file.isFile" />
             {{ file.name }}
@@ -14,29 +19,29 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from "vue"
-import { useRouter } from "vue-router"
-import { readDir } from "@tauri-apps/plugin-fs"
+import { onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
+import { readDir } from "@tauri-apps/plugin-fs";
 
-const router = useRouter()
-const fileTree = ref<any[]>([])
+const router = useRouter();
+const fileTree = ref<any[]>([]);
 
 onMounted(async () => {
-    const directory = router.currentRoute.value.params.directory as string
-    const contents = await readDir("/" + directory)
+    const directory = router.currentRoute.value.params.directory as string;
+    const contents = await readDir("/" + directory);
 
-    fileTree.value = []
+    fileTree.value = [];
     for (const item of contents) {
-        if (item.name.startsWith(".")) continue
+        if (item.name.startsWith(".")) continue;
 
-        const fullPath = directory + "/" + item.name
+        const fullPath = directory + "/" + item.name;
 
         fileTree.value.push({
             id: fullPath,
             name: item.name,
             isDir: item.isDirectory,
             isFile: item.isFile,
-        })
+        });
     }
 })
 </script>
@@ -57,12 +62,15 @@ onMounted(async () => {
         padding: 2px;
         border-radius: 4px;
 
-        cursor: not-allowed; // TODO when clickable: pointer;
+        cursor: pointer;
         transition: background-color 0.2s ease;
 
         &:hover {
             background-color: $bg-accent-light;
         }
+
+        // TODO add folder traversal
+        &.content-dir { cursor: not-allowed; }
 
         :deep(svg) {
             color: $fg-accent;

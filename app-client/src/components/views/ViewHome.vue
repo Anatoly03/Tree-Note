@@ -49,6 +49,7 @@ async function selectDirectory() {
         background-color: $bg-accent;
         
         margin: 0 40px;
+        padding-top: 10%;
         border-radius: 0 0 8px 8px;
         
         .app-logo {
