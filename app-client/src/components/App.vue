@@ -1,10 +1,12 @@
 <template>
     <div class="view-app">
+        <TitleBar />
         <ViewFileEditor />
     </div>
 </template>
 
 <script lang="ts" setup>
+import TitleBar from "./views/TitleBar.vue";
 // import ViewHome from "./views/ViewHome.vue";
 import ViewFileEditor from "./views/ViewFileEditor.vue";
 </script>
@@ -27,7 +29,6 @@ body {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     width: 100%;
     min-height: 100vh;
     margin: 0;

@@ -37,13 +37,10 @@ onMounted(async () => {
 .view-file-editor {
     flex: 1;
     display: flex;
-    width: 100%;
-    height: 100%;
+    padding: 10px;
     flex-direction: column;
 
     :deep(.ProseMirror) {
-        // TODO remove
-        background-color: $bg-secondary;
 
         flex: 1;
         width: 100%;
@@ -54,6 +51,9 @@ onMounted(async () => {
             outline: none;
         }
     }
+
+    // TODO remove
+    background-color: $bg-secondary;
 }
 </style>
 
