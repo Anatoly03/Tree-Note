@@ -1,32 +1,36 @@
+use tauri::{AppHandle, Wry};
+use tauri_plugin_store::StoreExt;
+
 /// A simple greet command.
 #[tauri::command]
 fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
 }
 
-/// A simple save command.
+/// A simple save command. This is a temporary endpoint to manage a
+/// static file.
 #[tauri::command]
-fn save_note(text: &str) -> Result<(), String> {
-    // Get documents directory, create path '~/Documents/.static-tree-note'
-    let dir = dirs::document_dir().ok_or("Could not find documents directory")?;
-    let file_path = dir.join(".static-tree-note");
-
-    // Save file
-    std::fs::write(file_path, text).map_err(|e| e.to_string())?;
-
+fn save_note(app: AppHandle<Wry>, text: &str) -> Result<(), String> {
+    app.store("test.json")
+        .map_err(|e| format!("Failed to open store: {}", e))?
+        .set("static", text);
     Ok(())
 }
 
-/// A simple load command.
+/// A simple load command. This is a temporary endpoint to manage a
+/// static file.
 #[tauri::command]
-fn load_note() -> Result<String, String> {
-    // Get documents directory, create path '~/Documents/.static-tree-note'
-    let dir = dirs::document_dir().ok_or("Could not find documents directory")?;
-    let file_path = dir.join(".static-tree-note");
-
-    // Load file, if not exist return empty string
-    let content = std::fs::read_to_string(file_path).unwrap_or("".into());
-
+fn load_note(app: AppHandle<Wry>) -> Result<String, String> {
+    let content = app
+        .store("test.json")
+        .map_err(|e| format!("Failed to open store: {}", e))?
+        .get("static")
+        .map(|v| {
+            v.as_str()
+                .unwrap_or("<b>Edit this to save</b> the static file!")
+                .to_string()
+        })
+        .unwrap_or("<b>Edit this to save</b> the static file!".to_string());
     Ok(content)
 }
 
@@ -34,6 +38,7 @@ fn load_note() -> Result<String, String> {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::new().build())
         .setup(|app| {
             if cfg!(debug_assertions) {
                 app.handle().plugin(
@@ -44,11 +49,43 @@ pub fn run() {
             }
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![
-            greet,
-            save_note,
-            load_note
-        ])
+        .invoke_handler(tauri::generate_handler![greet, save_note, load_note])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
+
+// async fn save_note(app: AppHandle<Wry>, text: &str) -> Result<(), String> {
+//     let app = app.clone();
+//     let text = text.to_string();
+//     tauri::async_runtime::spawn_blocking(move || {
+//         let store = app
+//             .store("test.json")
+//             .map_err(|e| format!("Failed to open store: {}", e))?;
+//         store.set("static", json!({ "content": text }));
+//         store.close_resource();
+//         .map(|v| v.as_str().unwrap_or("<b>Edit this to save</b> the static file!").to_string())
+//         .unwrap_or("".to_string());
+//     store.close_resource();
+//     println!("{}", content);
+//     Ok(content)
+// }
+
+// /// A simple load command.
+// #[tauri::command]
+// async fn load_note(app: AppHandle<Wry>) -> Result<String, String> {
+//     let app = app.clone();
+//     tauri::async_runtime::spawn_blocking(move || {
+//         let store = app
+//             .store("test.json")
+//             .map_err(|e| format!("Failed to open store: {}", e))?;
+//         let content = store
+//             .get("static")
+//             .map(|v| v.as_str().unwrap_or("<b>Edit this to save</b> the static file!").to_string())
+//             .unwrap_or("".to_string());
+//         store.close_resource();
+//         println!("{}", content);
+//         Ok(content)
+//     })
+//     .await
+//     .map_err(|e| format!("Failed to run blocking task: {}", e))?
+// }
