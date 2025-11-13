@@ -47,7 +47,7 @@ onMounted(async () => {
     for (const item of contents) {
         if (item.name.startsWith(".")) continue;
 
-        const fullPath = directory + "/" + item.name;
+        const fullPath = '/' + directory + "/" + item.name;
         const isMatch = props.selectedFile && fullPath === props.selectedFile;
 
         fileTree.value.push({
