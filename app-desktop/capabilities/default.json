@@ -8,6 +8,20 @@
   "permissions": [
     "core:default",
     "core:window:allow-start-dragging",
+    "dialog:default",
+    "fs:default",
+    "fs:allow-exists",
+    "fs:allow-stat",
+    "fs:allow-read",
+    "fs:allow-read-dir",
+    {
+      "identifier": "fs:allow-read-file",
+      "allow": [{ "path": "$HOME/**/*" }]
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "allow": [{ "path": "$HOME/**/*" }]
+    },
     "store:default"
   ]
 }
