@@ -1,5 +1,5 @@
 <template>
-    <div class="view-file-editor">
+    <div class="view-file-editor" @click="editor.commands.focus()">
         <EditorContent :editor="editor" />
     </div>
 </template>
