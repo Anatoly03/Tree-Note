@@ -71,6 +71,9 @@ onMounted(async () => {
         }
 
         if (item.isFile) {
+            // TODO make this dynamic
+            if (extension !== "md") continue;
+
             fileTree.value.push({
                 id: fullPath,
                 name,
