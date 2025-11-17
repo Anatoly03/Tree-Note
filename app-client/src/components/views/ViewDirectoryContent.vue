@@ -1,9 +1,13 @@
 <template>
     <div class="view-directory-content" :class="{'root-directory': props.isRoot}">
-        <div class="directory-header" v-if="!props.isRoot">
+        <div class="directory-header" v-if="!props.isRoot" @click="toggleVisibility()">
             {{directoryName}}
+            <span class="spoiler">
+                <font-awesome-icon icon="fa-solid fa-chevron-down" v-if="isVisible" />
+                <font-awesome-icon icon="fa-solid fa-chevron-right" v-if="!isVisible" />
+            </span>
         </div>
-        <div class="content">
+        <div class="content" v-if="isVisible">
             <ViewDirectoryContent
                 v-for="file in subdirectoryTree"
                 :key="file.id"
@@ -43,6 +47,7 @@ const directory = props.currentDirectory || router.currentRoute.value.params.dir
 const directoryName = directory.split("/").pop() || "/";
 const fileTree = ref<any[]>([]);
 const subdirectoryTree = ref<any[]>([]);
+const isVisible = ref(true);
 
 onMounted(async () => {
     const contents = await readDir("/" + directory);
@@ -111,6 +116,11 @@ function openFile(path: string) {
 
     emit("update:selectedFile", path);
 }
+
+// Hides or opensthe directory contents
+function toggleVisibility() {
+    isVisible.value = !isVisible.value;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -121,9 +131,22 @@ function openFile(path: string) {
     padding: 0 0 0 10px;
     flex-direction: column;
     gap: 2px;
+    border-radius: 4px;
 
     &.root-directory {
         padding: 10px;
+    }
+
+    .directory-header {
+        cursor: pointer;
+
+        .spoiler {
+            font-size: 0.8em;
+        }
+    }
+
+    &:has(> .directory-header:hover) {
+        background-color: $bg-accent-light;
     }
 
     // &:not(.root-directory) {
