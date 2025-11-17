@@ -62,8 +62,6 @@ onMounted(async () => {
         });
     }
 
-    console.debug(fileTree.value);
-
     // Select first file by default.
     if (!props.selectedFile) {
         const firstFile = fileTree.value.find(f => f.isFile);
