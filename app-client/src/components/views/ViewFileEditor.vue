@@ -106,3 +106,18 @@ onUpdated(async () => {
 }
 </style>
 
+<style lang="scss">
+.ProseMirror {
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        li {
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
+</style>
