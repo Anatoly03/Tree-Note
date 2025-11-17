@@ -41,6 +41,7 @@ function openFile(value: string | null) {
     flex: 1;
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 
     .directory-content {
         display: flex;

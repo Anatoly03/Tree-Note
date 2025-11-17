@@ -92,6 +92,7 @@ onUpdated(async () => {
     display: flex;
     padding: 10px;
     flex-direction: column;
+    overflow: auto;
 
     :deep(.ProseMirror) {
         flex: 1;

@@ -132,6 +132,7 @@ function toggleVisibility() {
     flex-direction: column;
     gap: 2px;
     border-radius: 4px;
+    overflow: auto;
 
     &.root-directory {
         padding: 10px;
