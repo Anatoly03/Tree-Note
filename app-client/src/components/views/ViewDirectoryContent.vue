@@ -1,18 +1,21 @@
 <template>
     <div class="view-directory-content">
+        <div class="directory-header" v-if="!props.isRoot">
+            {{directoryName}}
+        </div>
+        <ViewDirectoryContent
+            v-for="file in subdirectoryTree"
+            :key="file.id"
+            :currentDirectory="file.id"
+            :selectedFile="props.selectedFile"
+            @update:selectedFile="emit('update:selectedFile', $event)"
+        />
         <div
             v-for="file in fileTree"
             :key="file.id"
-            class="content"
-            :class="{
-                'content-dir': file.isDir,
-                'content-file': file.isFile,
-                'content-selected': file.isSelected,
-            }"
             @click="openFile(file.id)"
+            class="file-entry"
         >
-            <font-awesome-icon icon="fa-regular fa-folder" v-if="file.isDir" />
-            <font-awesome-icon icon="fa-regular fa-file" v-if="file.isFile" />
             {{ file.name }}
         </div>
     </div>
@@ -24,7 +27,9 @@ import { useRouter } from "vue-router";
 import { readDir } from "@tauri-apps/plugin-fs";
 
 const props = defineProps<{
-    selectedFile: string | null;
+    isRoot?: boolean;
+    currentDirectory?: string;
+    selectedFile?: string;
 }>();
 
 const emit = defineEmits<{
@@ -32,10 +37,12 @@ const emit = defineEmits<{
 }>();
 
 const router = useRouter();
+const directory = props.currentDirectory || router.currentRoute.value.params.directory as string;
+const directoryName = directory.split("/").pop() || "/";
 const fileTree = ref<any[]>([]);
+const subdirectoryTree = ref<any[]>([]);
 
 onMounted(async () => {
-    const directory = router.currentRoute.value.params.directory as string;
     const contents = await readDir("/" + directory);
 
     fileTree.value = [];
@@ -52,14 +59,30 @@ onMounted(async () => {
             ? item.name.substring(item.name.lastIndexOf('.') + 1)
             : null;
 
-        fileTree.value.push({
-            id: fullPath,
-            name,
-            extension,
-            isDir: item.isDirectory,
-            isFile: item.isFile,
-            isSelected: isMatch,
-        });
+        if (item.isDirectory) {
+            subdirectoryTree.value.push({
+                id: fullPath,
+                name,
+                isDir: item.isDirectory,
+                isFile: item.isFile,
+                isSelected: isMatch,
+            });
+            continue;
+        }
+
+        if (item.isFile) {
+            fileTree.value.push({
+                id: fullPath,
+                name,
+                extension,
+                isDir: item.isDirectory,
+                isFile: item.isFile,
+                isSelected: isMatch,
+            });
+            continue;
+        }
+
+        // neither file, nor folder, ignore.
     }
 
     // Select first file by default.
@@ -89,16 +112,13 @@ function openFile(path: string) {
 @use "@/assets/main.scss" as *;
 
 .view-directory-content {
-    flex: 0.3;
     display: flex;
-    padding: 10px;
+    padding: 0 5px;
     flex-direction: column;
     gap: 2px;
 
-    background-color: $bg-secondary;
-
-    .content {
-        padding: 2px;
+    .file-entry {
+        padding: 6px 10px;
         border-radius: 4px;
 
         cursor: pointer;
@@ -107,9 +127,6 @@ function openFile(path: string) {
         &:hover, &.content-selected {
             background-color: $bg-accent-light;
         }
-
-        // TODO add folder traversal
-        &.content-dir { cursor: not-allowed; }
 
         :deep(svg) {
             color: $fg-accent;

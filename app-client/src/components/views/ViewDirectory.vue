@@ -1,7 +1,13 @@
 <template>
     <div class="view-directory">
         <ViewSideMenu />
-        <ViewDirectoryContent :selectedFile="selectedFile" @update:selectedFile="openFile" />
+        <div class="directory-content">
+            <ViewDirectoryContent
+                isRoot
+                :selectedFile="selectedFile"
+                @update:selectedFile="openFile"
+            />
+        </div>
         <ViewFileEditor :path="selectedFile" />
     </div>
 </template>
@@ -27,6 +33,15 @@ function openFile(value: string | null) {
     flex: 1;
     display: flex;
     flex-direction: row;
+
+    .directory-content {
+        display: flex;
+        flex: 0.3;
+        flex-direction: column;
+        padding: 10px 0;
+    
+        background-color: $bg-secondary;
+    }
 }
 </style>
 
