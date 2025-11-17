@@ -1,5 +1,6 @@
 <template>
     <div class="view-directory">
+        <ViewSideMenu />
         <ViewDirectoryContent :selectedFile="selectedFile" @update:selectedFile="openFile" />
         <ViewFileEditor :path="selectedFile" />
     </div>
@@ -7,6 +8,7 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import ViewSideMenu from "./ViewSideMenu.vue";
 import ViewDirectoryContent from "./ViewDirectoryContent.vue";
 import ViewFileEditor from "./ViewFileEditor.vue";
 

@@ -15,11 +15,6 @@
             <font-awesome-icon icon="fa-regular fa-file" v-if="file.isFile" />
             {{ file.name }}
         </div>
-
-        <!-- TODO remove -->
-        <div class="footer">
-            <router-link to="/">Back to Home</router-link>
-        </div>
     </div>
 </template>
 
@@ -110,21 +105,6 @@ function openFile(path: string) {
 
         :deep(svg) {
             color: $fg-accent;
-        }
-    }
-
-    .footer {
-        margin-top: auto;
-        padding-top: 10px;
-        border-top: 1px solid $border-color;
-
-        :deep(a) {
-            color: $fg-accent;
-            text-decoration: none;
-
-            &:hover {
-                text-decoration: underline;
-            }
         }
     }
 }
