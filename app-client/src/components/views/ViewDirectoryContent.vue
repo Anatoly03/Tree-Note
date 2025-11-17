@@ -49,7 +49,10 @@ const fileTree = ref<any[]>([]);
 const subdirectoryTree = ref<any[]>([]);
 const isVisible = ref(true);
 
-onMounted(async () => {
+onMounted(() => readDirectoryDeep());
+// onUpdated(() => readDirectoryDeep());
+
+async function readDirectoryDeep() {
     const contents = await readDir("/" + directory);
 
     fileTree.value = [];
@@ -102,13 +105,11 @@ onMounted(async () => {
             emit("update:selectedFile", firstFile.id);
         }
     }
-});
 
-onUpdated(() => {
-    for (const file of fileTree.value) {
-        file.isSelected = props.selectedFile === file.id;
-    }
-});
+    // for (const file of fileTree.value) {
+    //     file.isSelected = props.selectedFile === file.id;
+    // }
+}
 
 function openFile(path: string) {
     const file = fileTree.value.find(f => f.id === path);

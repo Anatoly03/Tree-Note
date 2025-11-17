@@ -67,13 +67,20 @@ async function renameFile() {
         return;
     }
 
+    // const previousName = extension ? `${name.value}.${extension}` : name.value;
     const finalName = extension ? `${newName.value.trim()}.${extension}` : newName.value.trim();
     const newFullPath = baseDirectory === "/"
         ? `/${finalName}`
         : `${baseDirectory}/${finalName}`;
-    await rename(props.fullPath, newFullPath);
 
-    name.value = newName.value.trim();
+    try {
+        await rename(props.fullPath, newFullPath);
+        name.value = newName.value.trim();
+    } catch (e) {
+        console.error('could not rename file:', e);
+        // TODO show error to user
+        newName.value = name.value;
+    }
 }
 </script>
 

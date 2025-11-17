@@ -75,12 +75,13 @@ onUpdated(async () => {
         const text = typeof file === "string" ? file : new TextDecoder().decode(file);
 
         content = converter.makeHtml(text);
+        editor.value!.commands.setContent(content);
     } catch (e) {
-        content = `<p><b>Error</b>: Could not read file at path ${currentFile.value}</p>`;
+        // content = `<p><b>Error</b>: Could not read file at path ${currentFile.value}</p>`;
         // TODO show error to user
+        console.error('could not read file:', e);
     }
 
-    editor.value!.commands.setContent(content);
 });
 </script>
 
