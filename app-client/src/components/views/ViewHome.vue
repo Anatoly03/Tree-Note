@@ -24,6 +24,8 @@ async function selectDirectory() {
         directory: true
     });
 
+    if (!directory) return;
+
     // TODO sanitize directory is not null
     // TODO test directory is not file
 
