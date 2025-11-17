@@ -45,14 +45,24 @@ onMounted(async () => {
         const fullPath = '/' + directory + "/" + item.name;
         const isMatch = props.selectedFile && fullPath === props.selectedFile;
 
+        const name = item.name.lastIndexOf('.') > 0
+            ? item.name.substring(0, item.name.lastIndexOf('.'))
+            : item.name;
+        const extension = item.name.lastIndexOf('.') > 0
+            ? item.name.substring(item.name.lastIndexOf('.') + 1)
+            : null;
+
         fileTree.value.push({
             id: fullPath,
-            name: item.name,
+            name,
+            extension,
             isDir: item.isDirectory,
             isFile: item.isFile,
             isSelected: isMatch,
         });
     }
+
+    console.debug(fileTree.value);
 
     // Select first file by default.
     if (!props.selectedFile) {
