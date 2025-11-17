@@ -74,6 +74,7 @@ async function renameFile() {
         : `${baseDirectory}/${finalName}`;
 
     try {
+        // TODO BUG: fix: rename throws error despite successful move
         await rename(props.fullPath, newFullPath);
         name.value = newName.value.trim();
     } catch (e) {
