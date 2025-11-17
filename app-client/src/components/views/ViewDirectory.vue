@@ -38,8 +38,6 @@ function openFile(value: string | null) {
         display: flex;
         flex: 0.3;
         flex-direction: column;
-        padding: 10px 0;
-    
         background-color: $bg-secondary;
     }
 }

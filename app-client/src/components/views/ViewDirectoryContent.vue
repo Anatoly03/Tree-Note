@@ -1,22 +1,24 @@
 <template>
-    <div class="view-directory-content">
+    <div class="view-directory-content" :class="{'root-directory': props.isRoot}">
         <div class="directory-header" v-if="!props.isRoot">
             {{directoryName}}
         </div>
-        <ViewDirectoryContent
-            v-for="file in subdirectoryTree"
-            :key="file.id"
-            :currentDirectory="file.id"
-            :selectedFile="props.selectedFile"
-            @update:selectedFile="emit('update:selectedFile', $event)"
-        />
-        <div
-            v-for="file in fileTree"
-            :key="file.id"
-            @click="openFile(file.id)"
-            class="file-entry"
-        >
-            {{ file.name }}
+        <div class="content">
+            <ViewDirectoryContent
+                v-for="file in subdirectoryTree"
+                :key="file.id"
+                :currentDirectory="file.id"
+                :selectedFile="props.selectedFile"
+                @update:selectedFile="emit('update:selectedFile', $event)"
+            />
+            <div
+                v-for="file in fileTree"
+                :key="file.id"
+                @click="openFile(file.id)"
+                class="file-entry"
+            >
+                {{ file.name }}
+            </div>
         </div>
     </div>
 </template>
@@ -116,12 +118,22 @@ function openFile(path: string) {
 
 .view-directory-content {
     display: flex;
-    padding: 0 5px;
+    padding: 0 0 0 10px;
     flex-direction: column;
     gap: 2px;
 
+    &.root-directory {
+        padding: 10px;
+    }
+
+    // &:not(.root-directory) {
+    //     .content {
+    //         border-left: 1px solid $bg-accent-dark;
+    //     }
+    // }
+
     .file-entry {
-        padding: 6px 10px;
+        padding: 1px 10px;
         border-radius: 4px;
 
         cursor: pointer;
