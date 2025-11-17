@@ -1,0 +1,19 @@
+// This stylesheet changes the appearance of ProseMirror editor content.
+
+.ProseMirror {
+    h1 {
+        margin: 0;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        li {
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
