@@ -46,6 +46,7 @@ function toggleSidebar() {
     justify-content: space-between;
 
     background-color: $bg-default;
+    border-right: 1px solid $fg-light-secondary;
     
     .section {
         display: flex;

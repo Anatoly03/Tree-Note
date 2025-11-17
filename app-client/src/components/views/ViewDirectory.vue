@@ -48,7 +48,9 @@ function openFile(value: string | null) {
         display: flex;
         flex: 0.3;
         flex-direction: column;
-        background-color: $bg-secondary;
+        // background-color: $bg-secondary;
+
+        border-right: 1px solid $fg-light-secondary;
         
         overflow: hidden;
         opacity: 1;
