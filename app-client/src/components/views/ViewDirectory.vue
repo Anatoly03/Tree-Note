@@ -1,7 +1,7 @@
 <template>
     <div class="view-directory">
-        <ViewSideMenu />
-        <div class="directory-content">
+        <ViewSideMenu @toggleSidebar="sidebarToggle = $event" />
+        <div class="directory-content" :class="{'hide': !sidebarToggle}">
             <div class="top-menu">
                 <a>
                     <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
@@ -26,6 +26,7 @@ import ViewSideMenu from "./ViewSideMenu.vue";
 import ViewDirectoryContent from "./ViewDirectoryContent.vue";
 import ViewFileEditor from "./ViewFileEditor.vue";
 
+const sidebarToggle = ref(true);
 const selectedFile = ref<string | null>(null);
 
 // Update the selected file when a file is opened.
@@ -48,6 +49,18 @@ function openFile(value: string | null) {
         flex: 0.3;
         flex-direction: column;
         background-color: $bg-secondary;
+        
+        overflow: hidden;
+        opacity: 1;
+        transition: flex 220ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease;
+        will-change: flex, opacity;
+
+        &.hide {
+            flex: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
 
         .top-menu {
             display: flex;

@@ -1,7 +1,7 @@
 <template>
     <div class="view-side-menu">
         <div class="section">
-            <div class="side-menu-button selected disabled">
+            <div class="side-menu-button" @click="toggleSidebar()" :class="{'selected': sidebarToggle}">
                 <font-awesome-icon icon="fa-regular fa-folder-open" />
             </div>
             <div class="side-menu-button disabled">
@@ -23,6 +23,18 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
+
+const sidebarToggle = ref(true);
+
+const emit = defineEmits<{
+    (e: "toggleSidebar", value: boolean): void;
+}>();
+
+function toggleSidebar() {
+    sidebarToggle.value = !sidebarToggle.value;
+    emit("toggleSidebar", sidebarToggle.value);
+}
 </script>
 
 <style lang="scss" scoped>
