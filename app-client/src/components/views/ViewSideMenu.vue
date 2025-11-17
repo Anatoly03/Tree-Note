@@ -1,7 +1,7 @@
 <template>
     <div class="view-side-menu">
         <div class="section">
-            <div class="side-menu-button selected">
+            <div class="side-menu-button selected disabled">
                 <font-awesome-icon icon="fa-regular fa-folder-open" />
             </div>
             <div class="side-menu-button disabled">
@@ -69,12 +69,15 @@
             background-color: $bg-accent;
         }
 
-        &:not(.disabled).selected {
+        &.selected {
             background-color: $bg-accent-light;
-            cursor: default;
 
-            &:hover {
-                background-color: $bg-accent;
+            &:not(.disabled) {
+                cursor: default;
+                
+                &:hover {
+                    background-color: $bg-accent;
+                }
             }
         }
     }
