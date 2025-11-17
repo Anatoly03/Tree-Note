@@ -7,7 +7,7 @@
                 <font-awesome-icon icon="fa-solid fa-chevron-right" v-if="!isVisible" />
             </span>
         </div>
-        <div class="content" v-if="isVisible">
+        <div class="content" :class="{'hide': !isVisible}">
             <ViewDirectoryContent
                 v-for="file in subdirectoryTree"
                 :key="file.id"
@@ -141,12 +141,28 @@ function toggleVisibility() {
         cursor: pointer;
 
         .spoiler {
-            font-size: 0.8em;
+            color: $fg-muted;
+            font-size: 0.6em;
         }
     }
 
     &:has(> .directory-header:hover) {
         background-color: $bg-accent-light;
+    }
+
+    .content {
+        overflow: hidden;
+        max-height: 1200px; // large enough to contain typical content
+        opacity: 1;
+        transition: max-height 220ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease;
+        will-change: max-height, opacity;
+
+        &.hide {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
     }
 
     // &:not(.root-directory) {
