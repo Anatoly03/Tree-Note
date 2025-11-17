@@ -15,14 +15,13 @@
                 :selectedFile="props.selectedFile"
                 @update:selectedFile="emit('update:selectedFile', $event)"
             />
-            <div
+            <ViewDirectoryEntryFile
                 v-for="file in fileTree"
                 :key="file.id"
-                @click="openFile(file.id)"
-                class="file-entry"
-            >
-                {{ file.name }}
-            </div>
+                :fullPath="file.id"
+                :selectedFile="props.selectedFile"
+                @update:selectedFile="emit('update:selectedFile', $event)"
+            />
         </div>
     </div>
 </template>
@@ -31,6 +30,7 @@
 import { onMounted, onUpdated, ref } from "vue";
 import { useRouter } from "vue-router";
 import { readDir } from "@tauri-apps/plugin-fs";
+import ViewDirectoryEntryFile from "./ViewDirectoryEntryFile.vue";
 
 const props = defineProps<{
     isRoot?: boolean;
@@ -170,21 +170,5 @@ function toggleVisibility() {
     //         border-left: 1px solid $bg-accent-dark;
     //     }
     // }
-
-    .file-entry {
-        padding: 1px 10px;
-        border-radius: 4px;
-
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-
-        &:hover, &.content-selected {
-            background-color: $bg-accent-light;
-        }
-
-        :deep(svg) {
-            color: $fg-accent;
-        }
-    }
 }
 </style>

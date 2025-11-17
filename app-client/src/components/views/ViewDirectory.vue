@@ -2,6 +2,14 @@
     <div class="view-directory">
         <ViewSideMenu />
         <div class="directory-content">
+            <div class="top-menu">
+                <a>
+                    <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
+                </a>
+                <a>
+                    <font-awesome-icon icon="fa-solid fa-folder-plus" />
+                </a>
+            </div>
             <ViewDirectoryContent
                 isRoot
                 :selectedFile="selectedFile"
@@ -39,6 +47,26 @@ function openFile(value: string | null) {
         flex: 0.3;
         flex-direction: column;
         background-color: $bg-secondary;
+
+        .top-menu {
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            padding: 8px 8px 0 8px;
+            gap: 4px;
+
+            a {
+                padding: 8px;
+                border-radius: 4px;
+
+                &:hover {
+                    background-color: $bg-accent-light;
+                }
+
+                text-align: center;
+                cursor: pointer;
+            }
+        }
     }
 }
 </style>
