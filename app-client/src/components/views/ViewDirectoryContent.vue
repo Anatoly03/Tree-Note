@@ -58,6 +58,14 @@ onMounted(async () => {
             isSelected: isMatch,
         });
     }
+
+    // Select first file by default.
+    if (!props.selectedFile) {
+        const firstFile = fileTree.value.find(f => f.isFile);
+        if (firstFile) {
+            emit("update:selectedFile", firstFile.id);
+        }
+    }
 });
 
 onUpdated(() => {
