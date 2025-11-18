@@ -1,5 +1,5 @@
 <template>
-    <div class="view-file-editor" @click="editor.commands.focus()">
+    <div class="view-file-editor" ref="editorContainer" @click="editor.commands.focus()">
         <EditorContent :editor="editor" />
     </div>
 </template>
@@ -25,6 +25,8 @@ const editor = useEditor({
     extensions: [StarterKit],
 });
 
+const editorContainer = ref<HTMLDivElement | null>(null);
+
 // The currently opened file path.
 const currentFile = ref<string | null>(props.path);
 
@@ -41,26 +43,23 @@ async function saveFile() {
 
         await writeFile(currentFile.value, stream);
     } catch (e) {
-        console.error('could not save file:', e);
         // TODO show error to user
+        console.error('could not save file:', e);
     }
 }
 
-// Load note content when component is mounted. Currently, there is
-// no error handling and only one file saved.
+// Load note content when component is mounted.
 onMounted(async () => {
-    // Save note content after every update. Currently, there is
-    // no error handling and only one file saved.
+    // Save note content after every update.
     editor.value!.on("update", () => saveFile());
+
+    editorContainer.value!.scrollTop = 0;
 });
 
 // Update the editor content when the file path changes. This save-closes
 // the current file, updates path and reads new file.
 onUpdated(async () => {
-    // saveFile();
-    
     if (props.path === currentFile.value) return;
-    // TODO close file
     
     currentFile.value = props.path;
     if (!currentFile.value) {
@@ -75,12 +74,12 @@ onUpdated(async () => {
         const text = typeof file === "string" ? file : new TextDecoder().decode(file);
 
         content = converter.makeHtml(text);
+        editor.value!.commands.setContent(content);
     } catch (e) {
-        content = `<p><b>Error</b>: Could not read file at path ${currentFile.value}</p>`;
         // TODO show error to user
+        console.error('could not read file:', e);
     }
 
-    editor.value!.commands.setContent(content);
 });
 </script>
 
@@ -92,6 +91,7 @@ onUpdated(async () => {
     display: flex;
     padding: 10px;
     flex-direction: column;
+    overflow: auto;
 
     :deep(.ProseMirror) {
         flex: 1;
@@ -105,4 +105,3 @@ onUpdated(async () => {
     }
 }
 </style>
-

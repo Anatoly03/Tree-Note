@@ -1,27 +1,36 @@
-@import "./main.scss";
+@use "./main.scss" as *;
 
 input[type=text] {
-    color: $primary-text;
+    color: $fg-default;
     border: $border;
-    // border-radius: $border-radius;
-    background-color: $primary-bg;
+    border-radius: $border-radius;
+    background-color: $bg-default;
+    font-size: 1em;
+    font: inherit;
+    width: 100%;
+
+    &.inline {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
 
     &:focus {
         outline: none;
-        background-color: $primary-bg-hover;
+        background-color: $bg-accent-light;
     }
 
     transition: background-color 0.3s ease;
 }
 
 input[type=submit], button[type=submit], .submit {
-    color: $primary-bg-dark;
+    color: $bg-accent-dark;
     border: $border;
     // border-radius: $border-radius;
-    background-color: $primary-bg-light;
+    background-color: $bg-accent;
 
     &:hover {
-        background-color: $primary-bg-light-hover;
+        background-color: $bg-accent-light;
     }
 
     transition: background-color 0.3s ease;
@@ -34,7 +43,7 @@ input[type=submit], button[type=submit], .submit {
 
 //     &:focus, &:hover {
 //         outline: none;
-//         border-color: $primary-bg-dark;
+//         border-color: $bg-accent-dark;
 //     }
 
     &:focus {
