@@ -78,8 +78,8 @@ async function renameFile() {
         await rename(props.fullPath, newFullPath);
         name.value = newName.value.trim();
     } catch (e) {
-        console.error('could not rename file:', e);
         // TODO show error to user
+        console.error('could not rename file:', e);
         newName.value = name.value;
     }
 }
